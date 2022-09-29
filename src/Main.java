@@ -2,40 +2,51 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Main {
-    static String text = new String("Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.");
+    public static String text = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.";
 
 
     public static void main(String[] args) {
         Map<Character, Integer> charCount = new HashMap<>();
-        int symbolSum = 1;
 
         for (int i = 0; i < text.length(); i++) {
             char symbol = text.charAt(i);
 
             if
-            (!charCount.containsKey(symbol) && Character.isLetter(symbol)) {
-                charCount.put(symbol, symbolSum);
+            (!Character.isLetter(symbol)) {
+                continue;
             }
-            if
-            (charCount.containsKey(symbol)) {
-                symbolSum++;
-                charCount.put(symbol, symbolSum);
+
+            if (charCount.containsKey(symbol)) {
+
+                charCount.put(symbol, charCount.get(symbol) + 1);
+            } else {
+                charCount.put(symbol, 1);
             }
+
         }
 
         int maxValue = -1;
-        for (int value : charCount.values()) {
-            if (value > maxValue) {
-                maxValue = value;
+        char max = 0;
+        for (char value : charCount.keySet()) {
+            int frecMax = charCount.get(value);
+            if (frecMax > maxValue) {
+                maxValue = frecMax;
+                max = value;
             }
+
         }
+        System.out.println(" max  " + max + " " + maxValue);
 
         int minValue = Integer.MAX_VALUE;
-        for (int value : charCount.values()) {
-            if (value < minValue) {
-                minValue = value;
+        char min = 0;
+        for (char value : charCount.keySet()) {
+            int frecMin = charCount.get(value);
+            if (frecMin < minValue) {
+                minValue = frecMin;
+                min = value;
             }
         }
+        System.out.println(" min  " + min + " " + minValue);
     }
 
 
